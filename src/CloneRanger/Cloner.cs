@@ -6,6 +6,12 @@ namespace CloneRanger
 {
     public class Cloner
     {
+        /// <summary>
+        /// Clone an object.
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <param name="objectToClone">The object to clone.</param>
+        /// <returns>The cloned object.</returns>
         public T Clone<T>(T objectToClone) where T : class
         {
             if (objectToClone == null)
