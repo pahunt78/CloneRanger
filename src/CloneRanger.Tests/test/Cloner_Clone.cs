@@ -22,50 +22,50 @@ namespace CloneRanger.Tests.test
         [TestCase("this is a string")]
         public void Should_clone_string_property(string propertyValue)
         {
-            var simple = new StringPropertyClass
+            var stringPropertyClass = new StringPropertyClass
             {
                 StringProperty = propertyValue
             };
 
-            StringPropertyClass clone = _cloner.Clone(simple);            
+            StringPropertyClass clone = _cloner.Clone(stringPropertyClass);            
 
-            Assert.That(clone, Is.Not.EqualTo(simple));
-            Assert.That(clone.StringProperty, Is.EqualTo(simple.StringProperty));
+            Assert.That(clone, Is.Not.EqualTo(stringPropertyClass));
+            Assert.That(clone.StringProperty, Is.EqualTo(stringPropertyClass.StringProperty));
         }
 
         [Test]
         public void Should_clone_int_property()
         {
-            var simple = new IntPropertyClass()
+            var intPropertyClass = new IntPropertyClass()
             {
                 IntProperty = 1
             };
 
-            IntPropertyClass clone = _cloner.Clone(simple);
+            IntPropertyClass clone = _cloner.Clone(intPropertyClass);
 
-            Assert.That(clone, Is.Not.EqualTo(simple));
-            Assert.That(clone.IntProperty, Is.EqualTo(simple.IntProperty));
+            Assert.That(clone, Is.Not.EqualTo(intPropertyClass));
+            Assert.That(clone.IntProperty, Is.EqualTo(intPropertyClass.IntProperty));
         }
 
         [TestCase(1)]
         [TestCase(null)]
         public void Should_clone_nullable_int_property(int? propertyValue)
         {
-            var simple = new NullableIntPropertyClass
+            var nullableIntPropertyClass = new NullableIntPropertyClass
             {
                 NullableIntProperty = 1
             };
 
-            NullableIntPropertyClass clone = _cloner.Clone(simple);
+            NullableIntPropertyClass clone = _cloner.Clone(nullableIntPropertyClass);
 
-            Assert.That(clone, Is.Not.EqualTo(simple));
-            Assert.That(clone.NullableIntProperty, Is.EqualTo(simple.NullableIntProperty));
+            Assert.That(clone, Is.Not.EqualTo(nullableIntPropertyClass));
+            Assert.That(clone.NullableIntProperty, Is.EqualTo(nullableIntPropertyClass.NullableIntProperty));
         }
 
         [Test]
         public void Should_clone_parent_child_object()
         {
-            var parentChild = new ParentChildClass
+            var parentChildClass = new ParentChildClass
             {
                 StringPropertyClass = new StringPropertyClass
                 {
@@ -73,28 +73,28 @@ namespace CloneRanger.Tests.test
                 }
             };
 
-            ParentChildClass clone = _cloner.Clone(parentChild);
+            ParentChildClass clone = _cloner.Clone(parentChildClass);
 
-            Assert.That(clone, Is.Not.EqualTo(parentChild));
-            Assert.That(clone.StringPropertyClass, Is.Not.EqualTo(parentChild.StringPropertyClass));
-            Assert.That(clone.StringPropertyClass.StringProperty, Is.EqualTo(parentChild.StringPropertyClass.StringProperty));
+            Assert.That(clone, Is.Not.EqualTo(parentChildClass));
+            Assert.That(clone.StringPropertyClass, Is.Not.EqualTo(parentChildClass.StringPropertyClass));
+            Assert.That(clone.StringPropertyClass.StringProperty, Is.EqualTo(parentChildClass.StringPropertyClass.StringProperty));
         }
 
         [Test]
         public void Should_clone_parent_child_object_with_null_child()
         {
-            var parentChild = new ParentChildClass();            
+            var parentChildClass = new ParentChildClass();            
 
-            ParentChildClass clone = _cloner.Clone(parentChild);
+            ParentChildClass clone = _cloner.Clone(parentChildClass);
 
-            Assert.That(clone, Is.Not.EqualTo(parentChild));
-            Assert.That(clone.StringPropertyClass, Is.EqualTo(parentChild.StringPropertyClass));            
+            Assert.That(clone, Is.Not.EqualTo(parentChildClass));
+            Assert.That(clone.StringPropertyClass, Is.EqualTo(parentChildClass.StringPropertyClass));            
         }
 
         [Test]
         public void Should_clone_parent_child_child_object()
         {
-            var parentChildChild = new ParentChildChildClass
+            var parentChildChildClass = new ParentChildChildClass
             {
                 ParentChildClass = new ParentChildClass
                 {
@@ -105,12 +105,12 @@ namespace CloneRanger.Tests.test
                 }
             };
 
-            ParentChildChildClass clone = _cloner.Clone(parentChildChild);
+            ParentChildChildClass clone = _cloner.Clone(parentChildChildClass);
 
-            Assert.That(clone, Is.Not.EqualTo(parentChildChild));
-            Assert.That(clone.ParentChildClass, Is.Not.EqualTo(parentChildChild.ParentChildClass));
-            Assert.That(clone.ParentChildClass.StringPropertyClass, Is.Not.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass));
-            Assert.That(clone.ParentChildClass.StringPropertyClass.StringProperty, Is.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass.StringProperty));
+            Assert.That(clone, Is.Not.EqualTo(parentChildChildClass));
+            Assert.That(clone.ParentChildClass, Is.Not.EqualTo(parentChildChildClass.ParentChildClass));
+            Assert.That(clone.ParentChildClass.StringPropertyClass, Is.Not.EqualTo(parentChildChildClass.ParentChildClass.StringPropertyClass));
+            Assert.That(clone.ParentChildClass.StringPropertyClass.StringProperty, Is.EqualTo(parentChildChildClass.ParentChildClass.StringPropertyClass.StringProperty));
         }
 
         [Test]
