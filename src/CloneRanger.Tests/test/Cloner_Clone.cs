@@ -24,7 +24,7 @@ namespace CloneRanger.Tests.test
                 StringProperty = propertyValue
             };
 
-            StringPropertyClass clone = _cloner.Clone(simple);
+            StringPropertyClass clone = _cloner.Clone(simple);            
 
             Assert.That(clone, Is.Not.EqualTo(simple));
             Assert.That(clone.StringProperty, Is.EqualTo(simple.StringProperty));
@@ -44,8 +44,9 @@ namespace CloneRanger.Tests.test
             Assert.That(clone.IntProperty, Is.EqualTo(simple.IntProperty));
         }
 
-        [Test]
-        public void Should_clone_nullable_int_property()
+        [TestCase(1)]
+        [TestCase(null)]
+        public void Should_clone_nullable_int_property(int? propertyValue)
         {
             var simple = new NullableIntPropertyClass
             {
