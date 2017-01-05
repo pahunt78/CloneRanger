@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CloneRanger.Tests.test.TestClasses;
+using NUnit.Framework;
 
 namespace CloneRanger.Tests.test
 {

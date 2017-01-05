@@ -1,4 +1,4 @@
-namespace CloneRanger.Tests.test
+namespace CloneRanger.Tests.test.TestClasses
 {
     internal class ParentChildClass
     {
