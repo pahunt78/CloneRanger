@@ -77,5 +77,38 @@ namespace CloneRanger.Tests.test
             Assert.That(clone.StringPropertyClass, Is.Not.EqualTo(parentChild.StringPropertyClass));
             Assert.That(clone.StringPropertyClass.StringProperty, Is.EqualTo(parentChild.StringPropertyClass.StringProperty));
         }
+
+        [Test]
+        public void Should_clone_parent_child_object_with_null_child()
+        {
+            var parentChild = new ParentChildClass();            
+
+            ParentChildClass clone = _cloner.Clone(parentChild);
+
+            Assert.That(clone, Is.Not.EqualTo(parentChild));
+            Assert.That(clone.StringPropertyClass, Is.EqualTo(parentChild.StringPropertyClass));            
+        }
+
+        [Test]
+        public void Should_clone_parent_child_child_object()
+        {
+            var parentChildChild = new ParentChildChildClass
+            {
+                ParentChildClass = new ParentChildClass
+                {
+                    StringPropertyClass = new StringPropertyClass
+                    {
+                        StringProperty = "a"
+                    }
+                }
+            };
+
+            ParentChildChildClass clone = _cloner.Clone(parentChildChild);
+
+            Assert.That(clone, Is.Not.EqualTo(parentChildChild));
+            Assert.That(clone.ParentChildClass, Is.Not.EqualTo(parentChildChild.ParentChildClass));
+            Assert.That(clone.ParentChildClass.StringPropertyClass, Is.Not.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass));
+            Assert.That(clone.ParentChildClass.StringPropertyClass.StringProperty, Is.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass.StringProperty));
+        }
     }
 }
