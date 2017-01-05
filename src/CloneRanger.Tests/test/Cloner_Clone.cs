@@ -1,4 +1,6 @@
-﻿using CloneRanger.Tests.test.TestClasses;
+﻿using System.Collections.Generic;
+using System.Linq;
+using CloneRanger.Tests.test.TestClasses;
 using NUnit.Framework;
 
 namespace CloneRanger.Tests.test
@@ -109,6 +111,65 @@ namespace CloneRanger.Tests.test
             Assert.That(clone.ParentChildClass, Is.Not.EqualTo(parentChildChild.ParentChildClass));
             Assert.That(clone.ParentChildClass.StringPropertyClass, Is.Not.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass));
             Assert.That(clone.ParentChildClass.StringPropertyClass.StringProperty, Is.EqualTo(parentChildChild.ParentChildClass.StringPropertyClass.StringProperty));
+        }
+
+        [Test]
+        public void Should_clone_generic_list_of_string()
+        {
+            const string listItem1 = "string 1";
+            const string listItem2 = "string 2";
+
+            var genericList = new List<string>
+            {
+                listItem1,
+                listItem2
+            };
+
+            List<string> clone = _cloner.Clone(genericList);
+            
+            Assert.That(clone.Count, Is.EqualTo(genericList.Count));            
+            Assert.That(clone.Any(x => x == listItem1));
+            Assert.That(clone.Any(x => x == listItem2));
+        }
+
+        [Test]
+        public void Should_clone_generic_list_of_int()
+        {
+            const int listItem1 = 1;
+            const int listItem2 = 2;
+
+            var genericList = new List<int>
+            {
+                listItem1,
+                listItem2
+            };
+
+            List<int> clone = _cloner.Clone(genericList);
+
+            Assert.That(clone.Count, Is.EqualTo(genericList.Count));
+            Assert.That(clone.Any(x => x == listItem1));
+            Assert.That(clone.Any(x => x == listItem2));
+        }
+
+        [Test]
+        public void Should_clone_generic_list_of_non_primitives()
+        {
+            var listItem1 = new StringPropertyClass { StringProperty = "1" };
+            var listItem2 = new StringPropertyClass { StringProperty = "2" };
+
+            var genericList = new List<StringPropertyClass>
+            {
+                listItem1,
+                listItem2
+            };
+
+            List<StringPropertyClass> clone = _cloner.Clone(genericList);
+
+            Assert.That(clone.Count, Is.EqualTo(genericList.Count));
+            Assert.That(clone[0], Is.Not.EqualTo(genericList[0]));
+            Assert.That(clone.Any(x => x.StringProperty == listItem1.StringProperty));
+            Assert.That(clone[1], Is.Not.EqualTo(genericList[1]));
+            Assert.That(clone.Any(x => x.StringProperty == listItem2.StringProperty));
         }
     }
 }
