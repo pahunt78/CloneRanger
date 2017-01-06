@@ -55,10 +55,10 @@ namespace CloneRanger
             return clone;
         }
 
-        private object CastGenericObjectToSpecificType(object obj, Type castToType)
+        private object CastGenericObjectToSpecificType(object genericObject, Type castToType)
         {
             MethodInfo method = GetType().GetTypeInfo().GetDeclaredMethod(nameof(Clone)).MakeGenericMethod(castToType);
-            return method.Invoke(this, new[] { obj });
+            return method.Invoke(this, new[] { genericObject });
         }
 
         private static bool IsCloneRequired(Type type)
