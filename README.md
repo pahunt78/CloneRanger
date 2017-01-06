@@ -1,5 +1,9 @@
 # Clone Ranger #
 
+<a href="http://pahunt.no-ip.org:8081/viewType.html?buildTypeId=CloneRanger_Build&guest=1">
+	<img src="http://pahunt.no-ip.org:8081/app/rest/builds/buildType:(id:CloneRanger_Build)/statusIcon"/>
+</a>
+
 ## Install instructions ##
 
 ```shell
