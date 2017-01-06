@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>clone-ranger</id>
-    <title>Clone Ranger</title>
-    <version>0.1.0-alpha</version>
+    <version>0.1.1-alpha</version>
+    <description>Clone Ranger is a library for cloning .NET objects.</description>
     <authors>woodburysoft</authors>
-    <owners>woodburysoft</owners>    
-    <description>Object cloning library</description>
-    <tags>clone</tags>        
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>    
+    <title>Clone Ranger</title>
+    <owners>woodburysoft</owners>
+    <projectUrl>https://github.com/woodburysoft/CloneRanger</projectUrl>
+    <tags>clone</tags>
   </metadata>
   <files>
-	<file src="bin\Release\**\CloneRanger.dll" target="lib" />   
+    <file src="bin\Release\**\CloneRanger.dll" target="lib" />
   </files>
 </package>
