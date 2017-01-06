@@ -1,4 +1,4 @@
-# CloneRanger #
+# Clone Ranger #
 
 ## Install instructions ##
 
@@ -29,4 +29,4 @@ List<string> clone = original.Clone();
 
 ## Questions? ##
 
-Either create an issue here https://github.com/woodburysoft/CloneRanger/issues/new or shoot me a question on Twitter where I'm @woodburysoft
+Either create a [Github issue](https://github.com/woodburysoft/CloneRanger/issues/new) or shoot me a question on Twitter where I'm [@woodburysoft](https://twitter.com/woodburysoft).
