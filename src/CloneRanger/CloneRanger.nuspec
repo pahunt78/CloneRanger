@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>clone-ranger</id>
+    <title>Clone Ranger</title>
+    <version>0.1.0-alpha</version>
+    <authors>woodburysoft</authors>
+    <owners>woodburysoft</owners>    
+    <description>Object cloning library</description>
+    <tags>clone</tags>        
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>    
+  </metadata>
+  <files>
+	<file src="bin\Release\**\CloneRanger.dll" target="lib" />   
+  </files>
+</package>
