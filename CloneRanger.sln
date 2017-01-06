@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CloneRanger", "src\CloneRanger\CloneRanger.xproj", "{1B607D1C-FD83-460B-81D9-9065F1FD8A8D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CloneRanger.Tests", "src\CloneRanger.Tests\CloneRanger.Tests.xproj", "{8BAB48EF-9383-47E8-AEDB-E0D075456ED8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{390F9A2B-D864-42B0-8EBA-684B5620A28F}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CloneRanger.Tests", "test\CloneRanger.Tests\CloneRanger.Tests.xproj", "{8BAB48EF-9383-47E8-AEDB-E0D075456ED8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
