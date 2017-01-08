@@ -14,7 +14,7 @@ namespace CloneRanger.Tests.test
         public void TestSetup()
         {            
             _cloner = new Cloner();
-        }
+        }                
 
         [TestCase(null)]
         [TestCase("")]
@@ -170,6 +170,26 @@ namespace CloneRanger.Tests.test
             Assert.That(clone.Any(x => x.StringProperty == listItem1.StringProperty));
             Assert.That(clone[1], Is.Not.EqualTo(genericList[1]));
             Assert.That(clone.Any(x => x.StringProperty == listItem2.StringProperty));
+        }
+
+        [Test]
+        public void Should_ignore_read_only_int_property()
+        {
+            var intPropertyClass = new ReadOnlyIntPropertyClass();            
+
+            ReadOnlyIntPropertyClass clone = _cloner.Clone(intPropertyClass);
+
+            Assert.That(clone, Is.Not.EqualTo(intPropertyClass));            
+        }
+
+        [Test]
+        public void Should_ignore_read_only_child_property()
+        {
+            var parentReadOnlyChildClass = new ParentReadOnlyChildClass();
+
+            ParentReadOnlyChildClass clone = _cloner.Clone(parentReadOnlyChildClass);
+
+            Assert.That(clone, Is.Not.EqualTo(parentReadOnlyChildClass));
         }
     }
 }

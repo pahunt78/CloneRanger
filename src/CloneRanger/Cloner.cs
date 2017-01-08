@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Reflection;
 
 namespace CloneRanger
@@ -7,7 +8,6 @@ namespace CloneRanger
     public class Cloner
     {
         /// <summary>
-        /// Clone an object.
         /// </summary>
         /// <typeparam name="T">The type of the object.</typeparam>
         /// <param name="objectToClone">The object to clone.</param>
@@ -39,7 +39,7 @@ namespace CloneRanger
             }
             else
             {
-                foreach (PropertyInfo property in objectToClone.GetType().GetRuntimeProperties())
+                foreach (PropertyInfo property in objectToClone.GetType().GetRuntimeProperties().Where(x => x.CanWrite))
                 {
                     if (IsCloneRequired(property.PropertyType))
                     {                        
