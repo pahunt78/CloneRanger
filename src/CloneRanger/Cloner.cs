@@ -11,15 +11,16 @@ namespace CloneRanger
         /// </summary>
         /// <typeparam name="T">The type of the object.</typeparam>
         /// <param name="objectToClone">The object to clone.</param>
+        /// <param name="cloneConstruction">A function that constructs the clone.</param>
         /// <returns>The cloned object.</returns>
-        public T Clone<T>(T objectToClone) where T : class
+        public T Clone<T>(T objectToClone, Func<T> cloneConstruction) where T : class
         {
             if (objectToClone == null)
             {
                 return default(T);
             }
 
-            var clone = Activator.CreateInstance<T>();
+            T clone = cloneConstruction.Invoke();
 
             if (objectToClone is IList)
             {
@@ -28,8 +29,8 @@ namespace CloneRanger
                 foreach (object objectToCloneListItem in objectToCloneList)
                 {
                     if (IsCloneRequired(objectToCloneListItem.GetType()))
-                    {                        
-                        ((IList)clone).Add(CastGenericObjectToSpecificType(objectToCloneListItem, objectToCloneList.GetType().GetTypeInfo().GenericTypeArguments[0]));                    
+                    {
+                        ((IList)clone).Add(CastGenericObjectToSpecificType(objectToCloneListItem, objectToCloneList.GetType().GetTypeInfo().GenericTypeArguments[0]));
                     }
                     else
                     {
@@ -42,8 +43,8 @@ namespace CloneRanger
                 foreach (PropertyInfo property in objectToClone.GetType().GetRuntimeProperties().Where(x => x.CanWrite))
                 {
                     if (IsCloneRequired(property.PropertyType))
-                    {                        
-                        property.SetValue(clone, CastGenericObjectToSpecificType(property.GetValue(objectToClone), property.PropertyType.IsConstructedGenericType ? property.PropertyType.GenericTypeArguments[0] : property.PropertyType));                        
+                    {
+                        property.SetValue(clone, CastGenericObjectToSpecificType(property.GetValue(objectToClone), property.PropertyType.IsConstructedGenericType ? property.PropertyType.GenericTypeArguments[0] : property.PropertyType));
                     }
                     else
                     {
@@ -55,9 +56,29 @@ namespace CloneRanger
             return clone;
         }
 
+        /// <summary>
+        /// </summary>
+        /// <typeparam name="T">The type of the object.</typeparam>
+        /// <param name="objectToClone">The object to clone.</param>
+        /// <returns>The cloned object.</returns>
+        public T Clone<T>(T objectToClone) where T : class
+        {
+            if (objectToClone == null)
+            {
+                return default(T);
+            }
+
+            if (!objectToClone.GetType().GetTypeInfo().DeclaredConstructors.Any(x => !x.GetParameters().Any()))
+            {
+                throw new CloneRangerException($"The class {typeof(T).Name} has no parameterless constructor and no clone construction function has been provided.");                
+            }
+
+            return Clone(objectToClone, Activator.CreateInstance<T>);
+        }
+
         private object CastGenericObjectToSpecificType(object genericObject, Type castToType)
         {
-            MethodInfo method = GetType().GetTypeInfo().GetDeclaredMethod(nameof(Clone)).MakeGenericMethod(castToType);
+            MethodInfo method = GetType().GetTypeInfo().DeclaredMethods.First(x => x.Name == nameof(Clone) && x.GetParameters().Length == 1).MakeGenericMethod(castToType);
             return method.Invoke(this, new[] { genericObject });
         }
 

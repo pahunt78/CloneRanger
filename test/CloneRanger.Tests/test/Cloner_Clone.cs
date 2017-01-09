@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CloneRanger.Tests.test.TestClasses;
 using NUnit.Framework;
@@ -190,6 +191,26 @@ namespace CloneRanger.Tests.test
             ParentReadOnlyChildClass clone = _cloner.Clone(parentReadOnlyChildClass);
 
             Assert.That(clone, Is.Not.EqualTo(parentReadOnlyChildClass));
+        }
+
+        [Test]
+        public void Should_throw_for_when_the_object_types_without_a_parameterless_constructor()
+        {
+            var noParameterlessConstructorClass = new NoParameterlessConstructorClass("parameter value");
+
+            var exception = Assert.Throws<CloneRangerException>(() => _cloner.Clone(noParameterlessConstructorClass));
+            Assert.That(exception.Message, Is.EqualTo($"The class {typeof(NoParameterlessConstructorClass).Name} has no parameterless constructor and no clone construction function has been provided."));
+        }
+
+        [Test]
+        public void Should_clone_a_uri()
+        {
+            var uri = new Uri("https://www.google.com");
+
+            Uri clone = _cloner.Clone(uri, () => new Uri("https://www.google.com"));
+
+            //Assert.That(clone, Is.Not.EqualTo(uri));
+            Assert.That(clone.AbsoluteUri, Is.EqualTo(uri.AbsoluteUri));            
         }
     }
 }
