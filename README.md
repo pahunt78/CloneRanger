@@ -14,22 +14,9 @@ Clone Ranger is a .NET library that provides methods to perform a deep clone of 
 nuget install clone-ranger -pre
 ```
 
-## Examples ##
+## Example usage ##
 
-### Clone an object ###
-```csharp
-AnyClass original = new AnyClass();
-Cloner cloner = new Cloner();
-AnyClass clone = cloner.Clone(original);
-```
-
-### Clone an object using the extension method ###
-```csharp
-AnyClass original = new AnyClass();
-AnyClass clone = original.Clone();
-```
-
-More examples are available in the [Examples project](https://github.com/woodburysoft/CloneRanger/tree/master/src/CloneRanger.Examples)
+Check out the [wiki](https://github.com/woodburysoft/CloneRanger/wiki/Examples)
 
 ## Questions? ##
 
