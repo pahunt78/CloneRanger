@@ -4,13 +4,17 @@
 	<img src="http://pahunt.no-ip.org:8081/app/rest/builds/buildType:(id:CloneRanger_Build)/statusIcon"/>
 </a>
 
+## Purpose ##
+
+Clone Ranger is a .NET library that provides methods to perform a deep clone of any .NET object. It is designed to make usage as simple and require as little ceremony as possible.
+
 ## Install instructions ##
 
 ```shell
 nuget install clone-ranger -pre
 ```
 
-## Example ##
+## Examples ##
 
 ### Clone an object ###
 ```csharp
@@ -25,11 +29,7 @@ AnyClass original = new AnyClass();
 AnyClass clone = original.Clone();
 ```
 
-### Clone a list ###
-```csharp
-List<string> original = new List<string>();
-List<string> clone = original.Clone();
-```
+More examples are available in the [Examples project](https://github.com/woodburysoft/CloneRanger/tree/master/src/CloneRanger.Examples)
 
 ## Questions? ##
 
