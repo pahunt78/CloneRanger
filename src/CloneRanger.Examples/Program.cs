@@ -7,7 +7,7 @@ namespace CloneRanger.Examples
         public static void Main(string[] args)
         {
             var examples = new Examples();
-            examples.CloneAnObject(new AnyClass());
+            examples.CloneAnObject(new SimpleClass());
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();

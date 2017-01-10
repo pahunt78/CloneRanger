@@ -4,20 +4,26 @@ namespace CloneRanger.Examples
 {
     public class Examples
     {
-        public AnyClass CloneAnObject(AnyClass original)
+        public SimpleClass CloneAnObject(SimpleClass original)
         {            
             var cloner = new Cloner();
             return cloner.Clone(original);
-        }
+        }        
 
-        public AnyClass CloneAnObjectUsingExtensionMethod(AnyClass original)
+        public SimpleClass CloneAnObjectUsingExtensionMethod(SimpleClass original)
         {
             return original.Clone();
         }
 
-        public List<string> CloneAnObjectUsingExtensionMethod(List<string> original)
+        public NoParameterlessConstructor CloneAnObjectWithNoParameterlessConstructor(NoParameterlessConstructor original)
         {
-            return original.Clone();
+            var cloner = new Cloner();
+            return cloner.Clone(original, () => new NoParameterlessConstructor(0));
+        }
+
+        public NoParameterlessConstructor CloneAnObjectWithNoParameterlessConstructorUsingExtensionMethod(NoParameterlessConstructor original)
+        {
+            return original.Clone(() => new NoParameterlessConstructor(0));
         }
     }
 }
