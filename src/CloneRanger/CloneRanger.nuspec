@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>clone-ranger</id>
-    <version>0.1.1-alpha</version>
+    <version>0.2.0-alpha</version>
     <description>Clone Ranger is a library for cloning .NET objects.</description>
     <authors>woodburysoft</authors>
     <title>Clone Ranger</title>
