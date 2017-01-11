@@ -3,7 +3,7 @@
 namespace CloneRanger.Examples
 {
     public class Program
-    {         
+    {
         public static void Main(string[] args)
         {
             var examples = new Examples();

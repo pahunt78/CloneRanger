@@ -70,23 +70,23 @@ namespace CloneRanger
 
             if (!objectToClone.GetType().GetTypeInfo().DeclaredConstructors.Any(x => !x.GetParameters().Any()))
             {
-                throw new CloneRangerException($"The class {typeof(T).Name} has no parameterless constructor and no clone construction function has been provided.");                
+                throw new CloneRangerException($"The class {typeof(T).Name} has no parameterless constructor and no clone construction function has been provided.");
             }
 
             return Clone(objectToClone, Activator.CreateInstance<T>);
         }
 
-        private object CastGenericObjectToSpecificType(object genericObject, Type castToType)
-        {
-            MethodInfo method = GetType().GetTypeInfo().DeclaredMethods.First(x => x.Name == nameof(Clone) && x.GetParameters().Length == 1).MakeGenericMethod(castToType);
-            return method.Invoke(this, new[] { genericObject });
-        }
-
         private static bool IsCloneRequired(Type type)
         {
             return !(type.GetTypeInfo().IsPrimitive
-                   || type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
-                   || type == typeof(string));
+                     || type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                     || type == typeof(string));
+        }
+
+        private object CastGenericObjectToSpecificType(object genericObject, Type castToType)
+        {
+            MethodInfo method = GetType().GetTypeInfo().DeclaredMethods.First(x => x.Name == nameof(Clone) && x.GetParameters().Length == 1).MakeGenericMethod(castToType);
+            return method.Invoke(this, new[] {genericObject});
         }
     }
 }
